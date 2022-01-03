@@ -1,4 +1,5 @@
 import { ADD_TO_CART, REMOVE_ITEM, CLEAR_CART } from "./Types";
+import { toast } from "react-toastify";
 
 const Reducer = (state, action) => {
 	switch (action.type) {
@@ -9,6 +10,10 @@ const Reducer = (state, action) => {
 			};
 		}
 		case REMOVE_ITEM: {
+			toast.success("Product removed from cart!", {
+				position: toast.POSITION.TOP_CENTER,
+				autoClose: 3000,
+			});
 			return {
 				...state,
 				cartItems: state.cartItems.filter((item) => item.id !== action.payload),
@@ -16,6 +21,10 @@ const Reducer = (state, action) => {
 		}
 
 		case CLEAR_CART: {
+			toast.success("Your Cart is Empty Now!", {
+				position: toast.POSITION.TOP_CENTER,
+				autoClose: 3000,
+			});
 			return { cartItems: [] };
 		}
 

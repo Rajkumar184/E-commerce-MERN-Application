@@ -59,96 +59,95 @@ const ProductsData = ({ products, loading, search }) => {
 		setOpen(false);
 	};
 
+	// .filter((products) => {
+	// 					if (search === "") {
+	// 						return products;
+	// 					} else if (
+	// 						products.title.toLowerCase().includes(search.toLowerCase())
+	// 					) {
+	// 						return products;
+	// 					}
+	// 				})
+
 	return (
 		<>
 			<Grid container justify="center" spacing={12}>
-				{(loading ? Array.from(new Array(20)) : products)
+				{(loading ? Array.from(new Array(20)) : products).map((item, index) => (
+					<Grid item xs={12} sm={6} md={4} lg={3}>
+						<Card className={classes.root} key={index}>
+							{item ? (
+								<CardMedia
+									className={classes.media}
+									image={item.image}
+									title={item.title}
+								/>
+							) : (
+								<Skeleton variant="rectangular" width={310} height={300} />
+							)}
 
-					.filter((products) => {
-						if (search === "") {
-							return products;
-						} else if (
-							products.title.toLowerCase().includes(search.toLowerCase())
-						) {
-							return products;
-						}
-					})
-					.map((item, index) => (
-						<Grid item xs={12} sm={6} md={4} lg={3}>
-							<Card className={classes.root} key={index}>
-								{item ? (
-									<CardMedia
-										className={classes.media}
-										image={item.image}
-										title={item.title}
-									/>
-								) : (
-									<Skeleton variant="rectangular" width={310} height={300} />
-								)}
-
-								{item ? (
-									<Box sx={{ pr: 2 }}>
-										<CardContent>
-											<div className={classes.cardContent}>
-												<Typography gutterBottom component="h2">
-													{item.title}
-												</Typography>
-												<Typography
-													gutterBottom
-													variant="h6"
-													component="h2"
-													style={{ color: "#d63031" }}
-												>
-													₹{item.price.toFixed(2)}
-												</Typography>
-											</div>
-											<Rating
-												name="half-rating-read"
-												defaultValue={item.rating.rate}
-												readOnly
-											/>
-										</CardContent>
-										<CardActions disableSpacing className={classes.cardActions}>
-											<Button
-												component={Link}
-												to="/checkout"
-												variant="contained"
-												style={{ backgroundColor: "#576574", color: "white" }}
+							{item ? (
+								<Box sx={{ pr: 2 }}>
+									<CardContent>
+										<div className={classes.cardContent}>
+											<Typography gutterBottom component="h2">
+												{item.title}
+											</Typography>
+											<Typography
+												gutterBottom
+												variant="h6"
+												component="h2"
+												style={{ color: "#d63031" }}
 											>
-												BUY NOW
-											</Button>
+												₹{item.price.toFixed(2)}
+											</Typography>
+										</div>
+										<Rating
+											name="half-rating-read"
+											defaultValue={item.rating.rate}
+											readOnly
+										/>
+									</CardContent>
+									<CardActions disableSpacing className={classes.cardActions}>
+										<Button
+											component={Link}
+											to="/checkout"
+											variant="contained"
+											style={{ backgroundColor: "#576574", color: "white" }}
+										>
+											BUY NOW
+										</Button>
 
-											<IconButton
-												aria-label="add to shopping cart"
-												style={{ color: "green" }}
-												onClick={() => addToCart(item)}
+										<IconButton
+											aria-label="add to shopping cart"
+											style={{ color: "green" }}
+											onClick={() => addToCart(item)}
+										>
+											<AddShoppingCartIcon onClick={handleClick} />
+											<Snackbar
+												open={open}
+												autoHideDuration={1000}
+												onClose={handleClose}
 											>
-												<AddShoppingCartIcon onClick={handleClick} />
-												<Snackbar
-													open={open}
-													autoHideDuration={1000}
+												<Alert
 													onClose={handleClose}
+													severity="success"
+													xs={{ width: "100%" }}
 												>
-													<Alert
-														onClose={handleClose}
-														severity="success"
-														xs={{ width: "100%" }}
-													>
-														Added to Cart Successfully!
-													</Alert>
-												</Snackbar>
-											</IconButton>
-										</CardActions>
-									</Box>
-								) : (
-									<Box sx={{ pt: 0.5 }}>
-										<Skeleton />
-										<Skeleton width="80%" />
-									</Box>
-								)}
-							</Card>
-						</Grid>
-					))}
+													Added to Cart Successfully!
+												</Alert>
+											</Snackbar>
+										</IconButton>
+									</CardActions>
+								</Box>
+							) : (
+								<Box sx={{ pt: 0.5 }}>
+									<Skeleton />
+									<Skeleton width="80%" />
+								</Box>
+							)}
+						</Card>
+					</Grid>
+				))}
 			</Grid>
 		</>
 	);

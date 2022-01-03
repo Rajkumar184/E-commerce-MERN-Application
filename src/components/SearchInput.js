@@ -6,7 +6,7 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
 	root: {
 		width: "85%",
-		paddingLeft: 120,
+		paddingLeft: 100,
 		paddingBottom: 100,
 	},
 });

@@ -25,7 +25,8 @@ const useStyles = makeStyles({
 	},
 
 	root: {
-		width: "80%",
+		width: 320,
+		height: 410,
 		transition: "all 500ms ease-in-out",
 
 		"&:hover": {
@@ -40,7 +41,7 @@ const useStyles = makeStyles({
 
 	media: {
 		objectFit: "cover",
-		height: "0%",
+		height: 350,
 		paddingTop: "80%",
 	},
 });
